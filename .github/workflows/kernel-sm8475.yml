@@ -45,7 +45,7 @@ jobs:
             # 复制完可以取名kernel-sm8750.yml之类的，然后修改下面机型就行了，别的都不用管
         #- FEIL: 'oneplus_10t'
         #- FEIL: 'oneplus_11r'
-        - FEIL: 'oneplus_ace2'
+        #- FEIL: 'oneplus_ace2'
         - FEIL: 'oneplus_ace_pro'
         
     uses: ./.github/workflows/Build_SukiSU.yml
