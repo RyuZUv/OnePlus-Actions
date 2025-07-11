@@ -44,10 +44,10 @@ jobs:
             # 只有此处是要改的，本文件（kernel-sm8650.yml）是可以复制的
             # 复制完可以取名kernel-sm8750.yml之类的，然后修改下面机型就行了，别的都不用管
         - FEIL: 'oneplus_11'
-        - FEIL: 'oneplus_12_r'
-        - FEIL: 'oneplus_ace2_pro'
-        - FEIL: 'oneplus_ace3'
-        - FEIL: 'oneplus_open'
+        #- FEIL: 'oneplus_12_r'
+        #- FEIL: 'oneplus_ace2_pro'
+        #- FEIL: 'oneplus_ace3'
+        #- FEIL: 'oneplus_open'
         
     uses: ./.github/workflows/Build_SukiSU.yml
     secrets: inherit
