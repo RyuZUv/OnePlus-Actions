@@ -35,7 +35,31 @@ jobs:
       bbr: "Off"
       proxy: "On"
       
-
+  sm8475:
+    uses: ./.github/workflows/kernel-sm8475.yml
+    secrets: inherit
+    with:
+      CPU: "sm8475"
+      CPUD: "waipio"
+      ANDROID_VERSION: "android12"
+      KERNEL_VERSION: "5.10"
+      KPM: "Off"
+      lz4kd: "On"
+      bbr: "Off"
+      proxy: "On"
+      
+  sm8450:
+    uses: ./.github/workflows/kernel-sm8450.yml
+    secrets: inherit
+    with:
+      CPU: "sm8450"
+      CPUD: "waipio"
+      ANDROID_VERSION: "android12"
+      KERNEL_VERSION: "5.10"
+      KPM: "Off"
+      lz4kd: "On"
+      bbr: "Off"
+      proxy: "On"
 
   # sm8650:  --这里是任务名，用代号区分下就行
   #   uses: ./.github/workflows/kernel-sm8650.yml --由于一个文件代表一个处理器代号，这里也要使用你新建的其他文件
