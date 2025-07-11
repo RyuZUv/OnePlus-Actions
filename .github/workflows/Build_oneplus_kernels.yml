@@ -1,0 +1,89 @@
+name: Build Oneplus All
+permissions:
+  contents: write  # Allow writing to repository contents (for pushing tags)
+  actions: write   # Allows triggering actions
+
+on:
+  workflow_dispatch:  # This allows this workflow to be called from another workflow
+  
+jobs:
+  # 此处是一组任务，代表了sm8650的固定参数
+  # 你还需要添加其他的组
+  sm8650:
+    uses: ./.github/workflows/kernel-sm8650.yml
+    secrets: inherit
+    with:
+      CPU: "sm8650"
+      CPUD: "pineapple"
+      ANDROID_VERSION: "android14"
+      KERNEL_VERSION: "6.1"
+      KPM: "Off"
+      lz4kd: "Off"
+      bbr: "Off"
+      proxy: "On"
+
+  sm8550:
+    uses: ./.github/workflows/kernel-sm8550.yml
+    secrets: inherit
+    with:
+      CPU: "sm8550"
+      CPUD: "kalama"
+      ANDROID_VERSION: "android13"
+      KERNEL_VERSION: "5.15"
+      KPM: "Off"
+      lz4kd: "On"
+      bbr: "Off"
+      proxy: "On"
+      
+  sm8475:
+    uses: ./.github/workflows/kernel-sm8475.yml
+    secrets: inherit
+    with:
+      CPU: "sm8475"
+      CPUD: "waipio"
+      ANDROID_VERSION: "android12"
+      KERNEL_VERSION: "5.10"
+      KPM: "Off"
+      lz4kd: "On"
+      bbr: "Off"
+      proxy: "On"
+      
+  sm8450:
+    uses: ./.github/workflows/kernel-sm8450.yml
+    secrets: inherit
+    with:
+      CPU: "sm8450"
+      CPUD: "waipio"
+      ANDROID_VERSION: "android12"
+      KERNEL_VERSION: "5.10"
+      KPM: "Off"
+      lz4kd: "On"
+      bbr: "Off"
+      proxy: "On"
+
+  sm7675:
+    uses: ./.github/workflows/kernel-sm7675.yml
+    secrets: inherit
+    with:
+      CPU: "sm7675"
+      CPUD: "pineapple"
+      ANDROID_VERSION: "android14"
+      KERNEL_VERSION: "6.1"
+      KPM: "Off"
+      lz4kd: "Off"
+      bbr: "Off"
+      proxy: "On"
+
+  # sm8650:  --这里是任务名，用代号区分下就行
+  #   uses: ./.github/workflows/kernel-sm8650.yml --由于一个文件代表一个处理器代号，这里也要使用你新建的其他文件
+  #   secrets: inherit
+  #   with:
+    # 下面的参数跟sm xxxx 对应就行了，8650就填8650的
+  #     CPU: "sm8650" 
+  #     CPUD: "pineapple"
+  #     ANDROID_VERSION: "android14"
+  #     KERNEL_VERSION: "6.1"
+  #     KPM: "Off"
+  #     lz4kd: "Off"
+  #     bbr: "Off"
+  #     proxy: "On"

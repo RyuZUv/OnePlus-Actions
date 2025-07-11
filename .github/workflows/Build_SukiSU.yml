@@ -1,4 +1,4 @@
-name: Build OnePlus SukiSU Ultra
+name: call-build
 permissions:
   contents: write  # Allow writing to repository contents (for pushing tags)
   actions: write   # Allows triggering actions
@@ -15,31 +15,24 @@ on:
       CPUD:
         required: true
         type: string
-        default: 'pineapple'
       ANDROID_VERSION:
         required: true
         type: string
-        default: 'android14'
       KERNEL_VERSION:
         required: true
         type: string
-        default: '6.1'
       KPM:
        required: true
        type: string
-       default: 'Off'
       lz4kd:
        required: true
        type: string
-       default: 'Off'
       bbr:
        required: true
        type: string
-       default: 'Off'
       proxy:
        required: true
        type: string
-       default: 'On'
          
 jobs:
   build:
@@ -476,22 +469,22 @@ jobs:
           name: zram.ko
           path: ./kernel_workspace/kernel_platform/common/out/drivers/block/zram/zram.ko
 
-      - name: "📦 Package files | 打包文件"
-        run: |
-            echo "📦📤 正在打包文件..."
-            cd AnyKernel3
-            zip -q -r "../${{ steps.set_name.outputs.ARTIFACT_NAME }}.zip" ./*
-            cd ..
-            cat > release.txt << 'EOF'
-            #${{ inputs.FEIL }}
-            ```
-            构建时间：$(TZ=Asia/Shanghai date)
-            内核版本：${{ inputs.ANDROID_VERSION}}-${{ inputs.KERNEL_VERSION }}
-            KSU 版本：${{env.KSUVER_STR}}(${{env.KSUVER}})
-            KPM 状态：${{ inputs.KPM }}
-            LZ4KD 状态: ${{ inputs.lz4kd }}
-            ```
-            EOF
+      # - name: "📦 Package files | 打包文件"
+        # run: |
+            # echo "📦📤 正在打包文件..."
+            # cd AnyKernel3
+            # zip -q -r "../${{ steps.set_name.outputs.ARTIFACT_NAME }}.zip" ./*
+            # cd ..
+            # cat > release.txt << 'EOF'
+            # ${{ inputs.FEIL }}
+            # ```
+            # 构建时间：$(TZ=Asia/Shanghai date)
+            # 内核版本：${{ inputs.ANDROID_VERSION}}-${{ inputs.KERNEL_VERSION }}
+            # KSU 版本：${{env.KSUVER_STR}}(${{env.KSUVER}})
+            # KPM 状态：${{ inputs.KPM }}
+            # LZ4KD 状态: ${{ inputs.lz4kd }}
+            # ```
+            # EOF
 
       # - name: "📤 Upload to telegram | 上传至Telegram群组"
       #   if: ${{secrets.BOT_TOKEN != ""}}
@@ -503,30 +496,31 @@ jobs:
       #     file-path: "${{ steps.set_name.outputs.ARTIFACT_NAME }}.zip"
       #     caption-path: release.txt
 
-      # - name: "🤖 Get bot script | 获取 bot 脚本"
-        # uses: actions/checkout@v4
-        # with:
-         # path: bot
+      - name: "🤖 Get bot script | 获取 bot 脚本"
+        uses: actions/checkout@v4
+        with:
+         path: bot
 
-      # - name: "📤 Upload to telegram | 上传至Telegram群组"
-        # run: |
-          # if [ ! -z "${{ secrets.BOT_TOKEN }}" ]; then
-            # echo "📤 正在上传到Telegram..."
-            # cd AnyKernel3
-            # zip -q -r "../${{ steps.set_name.outputs.ARTIFACT_NAME }}.zip" ./*
-            # cd ..
-            # pip3 install telethon
-            # python3 ./bot/script/buildbot.py "./${{ steps.set_name.outputs.ARTIFACT_NAME }}.zip"
-            # echo "✅ 文件已上传到Telegram"
-          # fi
-        # env:
-          # CHATID: ${{secrets.CHATID}}
-          # BOT_TOKEN: ${{secrets.BOT_TOKEN}}
-          # MESSAGE_THREAD_ID: ${{secrets.MESSAGE_THREAD_ID}}
-          # KernelVer: ${{ inputs.ANDROID_VERSION}}-${{ inputs.KERNEL_VERSION }}
-          # DEVICE: ${{ inputs.FEIL }}
-          # KPM: ${{ inputs.KPM }}
-          # LZ4KD: ${{ inputs.lz4kd }}
-          # KSUVERSIONS: ${{env.KSUVER_STR}}(${{env.KSUVER}})
+      - name: "📤 Upload to telegram | 上传至Telegram群组"
+        run: |
+          if [ ! -z "${{ secrets.BOT_TOKEN }}" ]; then
+            echo "📤 正在上传到Telegram..."
+            cd AnyKernel3
+            zip -q -r "../${{ steps.set_name.outputs.ARTIFACT_NAME }}.zip" ./*
+            cd ..
+            pip3 install telethon
+            python3 ./bot/script/buildbot.py "./${{ steps.set_name.outputs.ARTIFACT_NAME }}.zip"
+            echo "✅ 文件已上传到Telegram"
+          fi
+        env:
+          CHATID: ${{secrets.CHATID}}
+          BOT_TOKEN: ${{secrets.BOT_TOKEN}}
+          MESSAGE_THREAD_ID: ${{secrets.MESSAGE_THREAD_ID}}
+          KernelVer: ${{ inputs.ANDROID_VERSION}}-${{ inputs.KERNEL_VERSION }}
+          DEVICE: ${{ inputs.FEIL }}
+          KPM: ${{ inputs.KPM }}
+          LZ4KD: ${{ inputs.lz4kd }}
+          KSUVERSIONS: ${{env.KSUVER_STR}}(${{env.KSUVER}})
+          
       #- name: 📊 Post-build disk check (构建后空间检查)
       #  run: df -h
