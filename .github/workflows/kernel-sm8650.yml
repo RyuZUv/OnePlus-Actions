@@ -45,7 +45,7 @@ jobs:
             # 复制完可以取名kernel-sm8750.yml之类的，然后修改下面机型就行了，别的都不用管
         - FEIL: 'oneplus_12'
         #- FEIL: 'oneplus_ace3_pro'
-        - FEIL: 'oneplus_ace5'
+        #- FEIL: 'oneplus_ace5'
         #- FEIL: 'oneplus_13r'
         - FEIL: 'oneplus_pad_pro'
         #- FEIL: 'oneplus_pad2'
