@@ -1,4 +1,4 @@
-name: sm8650-build (dispatch)
+name: opkernel-build-all (dispatch)
 permissions:
   contents: write  # Allow writing to repository contents (for pushing tags)
   actions: write   # Allows triggering actions
