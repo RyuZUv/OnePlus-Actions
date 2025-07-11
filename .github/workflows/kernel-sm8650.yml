@@ -2,7 +2,8 @@ name: sm8650-build
 permissions:
   contents: write  # Allow writing to repository contents (for pushing tags)
   actions: write   # Allows triggering actions
-
+on:
+  workflow_call: 
 jobs:
   build-kernel-sm8650: # 这里也可以改，随意
     strategy:
