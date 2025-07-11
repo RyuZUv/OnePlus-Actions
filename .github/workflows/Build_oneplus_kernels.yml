@@ -61,6 +61,19 @@ jobs:
       bbr: "Off"
       proxy: "On"
 
+  sm7675:
+    uses: ./.github/workflows/kernel-sm7675.yml
+    secrets: inherit
+    with:
+      CPU: "sm7675"
+      CPUD: "pineapple"
+      ANDROID_VERSION: "android14"
+      KERNEL_VERSION: "6.1"
+      KPM: "Off"
+      lz4kd: "Off"
+      bbr: "Off"
+      proxy: "On"
+
   # sm8650:  --这里是任务名，用代号区分下就行
   #   uses: ./.github/workflows/kernel-sm8650.yml --由于一个文件代表一个处理器代号，这里也要使用你新建的其他文件
   #   secrets: inherit
