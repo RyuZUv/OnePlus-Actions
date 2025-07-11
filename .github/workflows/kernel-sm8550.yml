@@ -1,0 +1,70 @@
+name: sm8550-build
+permissions:
+  contents: write  # Allow writing to repository contents (for pushing tags)
+  actions: write   # Allows triggering actions
+
+on:
+  workflow_call: 
+    inputs:
+        # 此处的输入是 build-kenel-all.yml 文件传入的，可以不用管
+      CPU:
+        required: true
+        type: string
+        default: 'sm8550'
+      FEIL:
+        required: false
+        type: string
+      CPUD:
+        required: true
+        type: string
+        default: 'pineapple'
+      ANDROID_VERSION:
+        required: true
+        type: string
+        default: 'android14'
+      KERNEL_VERSION:
+        required: true
+        type: string
+        default: '6.1'
+      KPM:
+       required: true
+       type: string
+       default: 'Off'
+      lz4kd:
+       required: true
+       type: string
+       default: 'Off'
+      bbr:
+       required: true
+       type: string
+       default: 'Off'
+      proxy:
+       required: true
+       type: string
+       default: 'On'
+jobs:
+  build-kernel-sm8550: # 这里也可以改，随意
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+            # 只有此处是要改的，本文件（kernel-sm8650.yml）是可以复制的
+            # 复制完可以取名kernel-sm8750.yml之类的，然后修改下面机型就行了，别的都不用管
+        - FEIL: 'oneplus_11'
+        - FEIL: 'oneplus_12_r'
+        - FEIL: 'oneplus_ace2_pro'
+        - FEIL: 'oneplus_ace_3'
+        - FEIL: 'oneplus_open'
+        
+    uses: ./.github/workflows/Build_Sukisu.yml
+    secrets: inherit
+    with:
+      CPU: ${{ inputs.CPU }}
+      FEIL: ${{ matrix.FEIL }}
+      CPUD: ${{ inputs.CPUD }}
+      ANDROID_VERSION: ${{ inputs.ANDROID_VERSION }}
+      KERNEL_VERSION: ${{ inputs.KERNEL_VERSION }}
+      KPM: ${{ inputs.KPM }}
+      lz4kd: ${{ inputs.lz4kd }}
+      bbr: ${{ inputs.bbr }}
+      proxy: ${{ inputs.proxy }}
