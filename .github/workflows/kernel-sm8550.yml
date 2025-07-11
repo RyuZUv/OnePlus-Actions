@@ -49,7 +49,7 @@ jobs:
         #- FEIL: 'oneplus_ace3'
         #- FEIL: 'oneplus_open'
         
-    uses: ./.github/workflows/Build_SukiSU.yml
+    uses: ./.github/workflows/Call_Build.yml
     secrets: inherit
     with:
       CPU: ${{ inputs.CPU }}
