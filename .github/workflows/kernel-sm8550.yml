@@ -5,43 +5,7 @@ permissions:
 
 on:
   workflow_call: 
-    inputs:
-        # 此处的输入是 build-kenel-all.yml 文件传入的，可以不用管
-      CPU:
-        required: true
-        type: string
-        default: 'sm8550'
-      FEIL:
-        required: false
-        type: string
-      CPUD:
-        required: true
-        type: string
-        default: 'pineapple'
-      ANDROID_VERSION:
-        required: true
-        type: string
-        default: 'android14'
-      KERNEL_VERSION:
-        required: true
-        type: string
-        default: '6.1'
-      KPM:
-       required: true
-       type: string
-       default: 'Off'
-      lz4kd:
-       required: true
-       type: string
-       default: 'Off'
-      bbr:
-       required: true
-       type: string
-       default: 'Off'
-      proxy:
-       required: true
-       type: string
-       default: 'On'
+
 jobs:
   build-kernel-sm8550: # 这里也可以改，随意
     strategy:
