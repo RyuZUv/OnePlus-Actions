@@ -10,7 +10,6 @@ on:
       CPU:
         required: true
         type: string
-        default: 'sm8550'
       FEIL:
         required: false
         type: string
@@ -47,7 +46,7 @@ jobs:
         - FEIL: 'oneplus_11'
         - FEIL: 'oneplus_12_r'
         - FEIL: 'oneplus_ace2_pro'
-        - FEIL: 'oneplus_ace_3'
+        - FEIL: 'oneplus_ace3'
         - FEIL: 'oneplus_open'
         
     uses: ./.github/workflows/Build_Sukisu.yml
