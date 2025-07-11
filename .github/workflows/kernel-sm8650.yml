@@ -50,7 +50,7 @@ jobs:
         - FEIL: 'oneplus_pad_pro'
         #- FEIL: 'oneplus_pad2'
         
-    uses: ./.github/workflows/Build_SukiSU.yml
+    uses: ./.github/workflows/Call_Build.yml
     secrets: inherit
     with:
       CPU: ${{ inputs.CPU }}
