@@ -1,14 +1,12 @@
 name: Build Oneplus All
 permissions:
-  contents: write  # Allow writing to repository contents (for pushing tags)
-  actions: write   # Allows triggering actions
+  contents: write
+  actions: write
 
 on:
-  workflow_dispatch:  # This allows this workflow to be called from another workflow
+  workflow_dispatch:
   
 jobs:
-  # 此处是一组任务，代表了sm8650的固定参数
-  # 你还需要添加其他的组
   sm8650:
     uses: ./.github/workflows/kernel-sm8650.yml
     secrets: inherit
